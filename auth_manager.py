@@ -169,4 +169,3 @@ def _spartan_token():
 
                 return spartan_ticket.get('SpartanToken', 'Spartan Token Not Found')
 
-_spartan_token()
