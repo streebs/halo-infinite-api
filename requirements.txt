@@ -1,0 +1,7 @@
+requests
+asyncio
+python-dotenv
+msal
+uvicorn
+fastapi
+fastapi[standard]
