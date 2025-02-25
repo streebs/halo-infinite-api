@@ -9,6 +9,7 @@ def request_data(method : str, url : str, data = {}):
         "Accept-Language": "us-en",
         "X-343-Authorization-Spartan": _spartan_token(),
         "Accept": "application/json",
+        "343-clearance": "46fe8e60-d952-4a4f-95d6-5d11941103e7"
         
     }
 
@@ -19,5 +20,5 @@ def request_data(method : str, url : str, data = {}):
     if response.status_code == 200:
         return response.json()
     else:
-        return None
+        return response.json()
     
