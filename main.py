@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+import uvicorn
 import apidata
 from auth_manager import _xuid
 
@@ -12,12 +13,21 @@ origins = [
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,
+    allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+@app.get('/servicerecord/careerrank')
+async def get_career_rank_data():
+    try:
+        url = "https://gamecms-hacs.svc.halowaypoint.com/hi/Progression/file/RewardTracks/CareerRanks/careerRank1.json"
+        data = apidata.request_data('GET', url)
+        return {"status": "success", "data": data}
+    except Exception as e:
+        return {"status": "failure", "error": e}
+    
 @app.get("/servicerecord/{gamertag}")
 async def get_service_record(gamertag : str):
     try:
@@ -59,6 +69,10 @@ async def get_clearence():
         return {"status": "success", "data": data}
     except Exception as e:
         return {"status": "failure", "error": e}
+    
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
     
 
 # IMAGE_FOLDER = 'media'
