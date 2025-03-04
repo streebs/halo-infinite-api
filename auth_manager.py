@@ -253,5 +253,22 @@ def _xuid(gamertag):
                 user = get_xuid(gamertag, xbl_token)
 
                 return user
-            
+
+def _343_clearance(spartan_token):
+
+    headers = {
+        "User-Agent": "OpenSpartan.Career/1.0",
+        "Accept-Language": "us-en",
+        "X-343-Authorization-Spartan": spartan_token,
+        "Accept": "application/json"
+    }
+    url = "https://settings.svc.halowaypoint.com/oban/flight-configurations/titles/hi/audiences/RETAIL/players/xuid(2535437387044548)/active?sandbox=UNUSED&build=210921.22.01.10.1706-0"
+    response = requests.get(url, headers=headers)
+
+    if response.status_code == 200:
+        return response.json()
+    else:
+        return None
+
+
 
