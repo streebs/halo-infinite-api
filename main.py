@@ -45,10 +45,13 @@ async def get_career_rank(gamertag: str):
     except Exception as e:
         return {"status": "failure", "error": e}
     
-@app.get('/servicerecord/careerrank/images')
-async def get_career_rank_info():
+@app.get('/images')
+async def get_career_rank_info(image_path):
     try:
-        data = apidata.request_data('GET', 'https://gamecms-hacs.svc.halowaypoint.com/hi/Progression/file/RewardTracks/CareerRanks/careerRank1.json')
+        base_path = 'https://gamecms-hacs.svc.halowaypoint.com/hi/Images/file'
+        path = f"{base_path}/{image_path}"
+        
+        data = apidata.request_data('GET', path)
         return {"status": "success", "data": data}
     except Exception as e:
         return {"status": "failure", "error": e}
